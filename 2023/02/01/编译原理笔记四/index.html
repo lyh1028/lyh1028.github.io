@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>编译原理课程笔记(四) | Aurora-Blog</title><meta name="author" content="Aurora"><meta name="copyright" content="Aurora"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文法定义及分类，初步介绍语法树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理课程笔记(四)">
+<meta property="og:url" content="https://lyh1028.github.io/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/index.html">
+<meta property="og:site_name" content="Aurora-Blog">
+<meta property="og:description" content="文法定义及分类，初步介绍语法树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lyh1028.github.io/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg">
+<meta property="article:published_time" content="2023-02-01T13:23:00.000Z">
+<meta property="article:modified_time" content="2023-02-13T13:28:16.858Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="编译原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lyh1028.github.io/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lyh1028.github.io/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '编译原理课程笔记(四)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-13 21:28:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/kid1412_avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/night_sky1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Aurora-Blog"><span class="site-name">Aurora-Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">编译原理课程笔记(四)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-01T13:23:00.000Z" title="发表于 2023-02-01 21:23:00">2023-02-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-13T13:28:16.858Z" title="更新于 2023-02-13 21:28:16">2023-02-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%90%86%E8%AE%BA%E8%AF%BE/">编译原理理论课</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="编译原理课程笔记(四)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>使用其他文法的原因：正则表达式不够powerful.</p>
+<p>eg. <span class="math inline">\(L=\{a^nb^n\ |n\ge 1\}\)</span> 无法用正则表达式表示。原因是有限自动机没有“记忆”功能。</p>
+<p>对于语义分析，我们需要上下文无关文法。</p>
+<h2 id="文法的形式化定义">1.文法的形式化定义</h2>
+<p>{T,N,s,<span class="math inline">\(\sigma\)</span>}</p>
+<ul>
+<li>T：终结符 不能再继续通过生成式向下推导的元素，在编程语言中一般为：关键字，数字，常量 （已经明确知道其代表的含义的字符）</li>
+<li>N：非终结符 能够继续推导，被替换成其他的串</li>
+<li>s：非终结符中的开始符号</li>
+<li><span class="math inline">\(\sigma\)</span> :产生式，即推导规则，例如 $ $
+<ul>
+<li>多个产生式可以合并：</li>
+<li><span class="math inline">\(\alpha\to\beta_1\)</span> ; $_2 $ 等价于 <span class="math inline">\(\alpha\to\beta_1|\beta_2\)</span></li>
+</ul></li>
+</ul>
+<p>在课件中的非终结符与终结符表示：</p>
+<p>T（终结符）：小写字母、运算符、标点、数字、加粗的string</p>
+<p>N（非终结符）：大写字母（S通常为开始符）Lowercase, italic names such as expr or stmt[小写斜体]；</p>
+<ul>
+<li><strong>句型</strong>（sentential form）：既有终结符又有非终结符（可以为空</li>
+<li><strong>句子</strong>（sentence）：没有非终结符</li>
+<li><strong>语言</strong>：由文法能够推导出的全体句子的集合</li>
+</ul>
+<p>总体规则：LHS-&gt;RHS，即由左端部分能推导出右端部分。</p>
+<p><span class="math inline">\((N\cup T)^+\)</span> 代表至少有一个终结符或非终结符</p>
+<p><span class="math inline">\((N\cup T)^*\)</span> 代表空字符，或至少有一个终结符或非终结符的集合。</p>
+<h2 id="文法分类">2.文法分类</h2>
+<ul>
+<li><p>0型文法-无限制文法</p>
+<ul>
+<li><p>规则形式：<span class="math inline">\(\alpha \to \beta,\alpha\in(N\cup T)^+,\beta \in(N\cup T)^*\)</span></p></li>
+<li><p><strong>LHS不能为空</strong>，LHS和RHS没有固定的长度关系</p></li>
+<li><p>派生字符串可能反复收缩和扩展</p></li>
+</ul></li>
+<li><p>1型文法-上下文有关文法</p></li>
+<li><p>规则形式：<span class="math inline">\(\alpha A\beta\to\alpha\gamma\beta\)</span></p>
+<ul>
+<li>其中<span class="math inline">\(A\in N,\alpha,\beta\in(N\cup T)^*,\gamma\in(N\cup T)^+\)</span></li>
+<li>注意<span class="math inline">\(\gamma\)</span>不能为空，而<span class="math inline">\(\alpha,\beta\)</span>均可以为空</li>
+<li><strong>长度关系</strong>：LHS<span class="math inline">\(\le\)</span>RHS</li>
+<li><strong>RHS不能为空</strong></li>
+</ul></li>
+<li><p>2型文法-上下文无关文法</p>
+<ul>
+<li>规则形式：<span class="math inline">\(A\to\gamma\)</span>
+<ul>
+<li><span class="math inline">\(A\in N,\gamma\in(N\cup T)^+\)</span></li>
+<li>LHS是非终结符，RHS不能为空（有时放松以简化语法，但规则总是可以重写以排除ε-产生式）</li>
+<li>举例：对于<span class="math inline">\(L=\{a^n b^n|n\ge 0\}\)</span>,可以用上下文无关文法表达：<span class="math inline">\(T=\{a,b\},N=\{S\},\delta=\{S\to aSb,S\to ab\}\)</span></li>
+</ul></li>
+</ul></li>
+<li><p>3型文法-正则文法</p>
+<ul>
+<li>规则形式：<span class="math inline">\(A\to\alpha,or\,A\to \alpha B,where\,A,B\in N,\alpha \in T\)</span>
+<ul>
+<li>LHS:一个单独的非终结符</li>
+<li>RHS：一个终结符，或者一个终结符+一个非终结符</li>
+<li>每一个step，string的长度最多增加1</li>
+</ul></li>
+</ul></li>
+<li><p><img src="image1.png" /></p></li>
+<li><p>例如：<span class="math inline">\(A\to1A|0\)</span> 可以用正则表达式1*0表示</p></li>
+</ul>
+<p>[推导] A derivation is a sequence of applications of rules</p>
+<p>从开始符开始，S⇒... ⇒... ⇒... ⇒ (sentence)【sentence全是终结符】</p>
+<p><strong>最左推导和最右推导——每次优先替换最左/右的非终结符</strong></p>
+<p>例如，给定文法：<span class="math inline">\(E\to E*E|E+E|(E)|id\)</span> ，推导出id*id+id*id可以用以下两种方式：</p>
+<p><img src="image2.png" /></p>
+<h2 id="parser-tree">3.Parser Tree</h2>
+<p>上面的文法有二义性，因为对于给定的一个句子，可以构建出多个分析树，如下图：</p>
+<p><img src="image3.png" /></p>
+<p>不可能自动消除歧义，一些resolutions：</p>
+<ul>
+<li>重新写文法</li>
+<li>加入消除歧义的规则（丢弃一部分分析树）</li>
+</ul>
+<p>消除二义性的方法：</p>
+<ul>
+<li>指定优先级</li>
+<li>指定结合性（左结合/右结合）</li>
+</ul>
+<p><img src="image4.png" /></p>
+<p>左侧更改了加号，乘号和括号的优先级，我们发现优先级的降低是通过引入新的非终结符实现的。</p>
+<p>右侧更改了结合性，<strong>左结合</strong>相当于有两个连续的同一优先级的运算符时，左边运算符加了圆括号。可以看到若一个运算符是左结合的，则生成式中RHS与LHS相同的部分在运算符左侧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io">Aurora</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/">https://lyh1028.github.io/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lyh1028.github.io" target="_blank">Aurora-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a></div><div class="post_share"><div class="social-share" data-image="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="编译原理课程笔记(二)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">编译原理课程笔记(二)</div></div></a></div><div class="next-post pull-right"><a href="/2023/01/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%80/" title="编译原理课程笔记(一)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">编译原理课程笔记(一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/01/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%80/" title="编译原理课程笔记(一)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-29</div><div class="title">编译原理课程笔记(一)</div></div></a></div><div><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%89/" title="编译原理课程笔记(三)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-01</div><div class="title">编译原理课程笔记(三)</div></div></a></div><div><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="编译原理课程笔记(二)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-01</div><div class="title">编译原理课程笔记(二)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/kid1412_avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aurora</div><div class="author-info__description">世之奇伟瑰怪非常之观，常在于险远，而人之所罕至焉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyh1028"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/liyh373@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">1.文法的形式化定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">2.文法分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#parser-tree"><span class="toc-number">3.</span> <span class="toc-text">3.Parser Tree</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/11/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" title="算法笔记&lt;回溯算法&gt;"><img src="/img/steins_gate_worldChange.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法笔记&lt;回溯算法&gt;"/></a><div class="content"><a class="title" href="/2023/02/11/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" title="算法笔记&lt;回溯算法&gt;">算法笔记&lt;回溯算法&gt;</a><time datetime="2023-02-11T13:23:00.000Z" title="发表于 2023-02-11 21:23:00">2023-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%89/" title="编译原理课程笔记(三)"><img src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="编译原理课程笔记(三)"/></a><div class="content"><a class="title" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%89/" title="编译原理课程笔记(三)">编译原理课程笔记(三)</a><time datetime="2023-02-01T13:23:00.000Z" title="发表于 2023-02-01 21:23:00">2023-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="编译原理课程笔记(二)"><img src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="编译原理课程笔记(二)"/></a><div class="content"><a class="title" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="编译原理课程笔记(二)">编译原理课程笔记(二)</a><time datetime="2023-02-01T13:23:00.000Z" title="发表于 2023-02-01 21:23:00">2023-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/" title="编译原理课程笔记(四)"><img src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="编译原理课程笔记(四)"/></a><div class="content"><a class="title" href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/" title="编译原理课程笔记(四)">编译原理课程笔记(四)</a><time datetime="2023-02-01T13:23:00.000Z" title="发表于 2023-02-01 21:23:00">2023-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%80/" title="编译原理课程笔记(一)"><img src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="编译原理课程笔记(一)"/></a><div class="content"><a class="title" href="/2023/01/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%80/" title="编译原理课程笔记(一)">编译原理课程笔记(一)</a><time datetime="2023-01-29T13:23:00.000Z" title="发表于 2023-01-29 21:23:00">2023-01-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Aurora</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
