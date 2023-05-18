@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>毕设入门-常用python操作 | Aurora-Blog</title><meta name="author" content="Aurora"><meta name="copyright" content="Aurora"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="python-类 用class关键字声明，例如： 123456789101112class MyClass:    &quot;&quot;&quot;一个简单的类实例&quot;&quot;&quot;    i &#x3D; 12345    def f(self):        return &amp;#x27;hello world&amp;#x27; # 实例化类x &#x3D; MyClass() # 访问类的属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="毕设入门-常用python操作">
+<meta property="og:url" content="https://lyh1028.github.io/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Aurora-Blog">
+<meta property="og:description" content="python-类 用class关键字声明，例如： 123456789101112class MyClass:    &quot;&quot;&quot;一个简单的类实例&quot;&quot;&quot;    i &#x3D; 12345    def f(self):        return &amp;#x27;hello world&amp;#x27; # 实例化类x &#x3D; MyClass() # 访问类的属性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lyh1028.github.io/img/kid1412_avatar1.jpg">
+<meta property="article:published_time" content="2023-04-25T01:11:19.000Z">
+<meta property="article:modified_time" content="2023-04-27T06:56:50.828Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="python;pytorch;人工智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lyh1028.github.io/img/kid1412_avatar1.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lyh1028.github.io/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '毕设入门-常用python操作',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-27 14:56:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/kid1412_avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Aurora-Blog"><span class="site-name">Aurora-Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">毕设入门-常用python操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-25T01:11:19.000Z" title="发表于 2023-04-25 09:11:19">2023-04-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-27T06:56:50.828Z" title="更新于 2023-04-27 14:56:50">2023-04-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="毕设入门-常用python操作"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="python-类">python-类</h2>
+<p>用class关键字声明，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span>:</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;一个简单的类实例&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    i = <span class="number">12345</span></span><br><span class="line">    def <span class="built_in">f</span>(self):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"> </span><br><span class="line"># 实例化类</span><br><span class="line">x = <span class="built_in">MyClass</span>()</span><br><span class="line"> </span><br><span class="line"># 访问类的属性和方法</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;MyClass 类的属性 i 为：&quot;</span>, x.i)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;MyClass 类的方法 f 输出为：&quot;</span>, x.<span class="built_in">f</span>())</span><br></pre></td></tr></table></figure>
+<h3 id="类的方法">类的方法</h3>
+<p>类的方法与普通的函数的区别——类中的函数必须有一个额外的<strong>第一个参数名称</strong>, 按照惯例它的名称是 self【“惯例，所以也可以不是self”】。这个参数代表当前对象的地址，有点像C++里的this指针。</p>
+<p>python中，不需要事先定义一个类中有什么变量，只需要用到变量X的时候self.X = xxx即可。（当然也可以事先定义，如下）python的类也有private variable，例如__score，它们只能在类内使用与访问。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span>:</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    __score = <span class="number">0</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, para1, para2,...</span>):</span><br><span class="line">        <span class="comment">#在类实例化时会自动调用</span></span><br><span class="line">        <span class="comment">#可以没有参数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self,para,...</span>):</span><br><span class="line">        <span class="comment">#表示类的实例化对象是可以调用的</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;callable&quot;</span>)</span><br><span class="line">t = Test()</span><br><span class="line">t() <span class="comment">#print(callable)</span></span><br></pre></td></tr></table></figure>
+<h3 id="类的简单继承">类的简单继承</h3>
+<p>例如神经网络，一定会继承torch.nn.Module类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">myNet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()<span class="comment">#super代表父类，本句调用了父类的初始化函数</span></span><br><span class="line">        <span class="comment">#MyNet initialize...</span></span><br></pre></td></tr></table></figure>
+<p>注意：python的子类方法如果和父类方法同名，则自动覆盖，如果子类实例想调用父类方法，需要用super，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.n = <span class="number">3</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, m</span>):</span><br><span class="line">        self.n += m</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>(<span class="title class_ inherited__">A</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self,m</span>):</span><br><span class="line">        <span class="built_in">super</span>().add(m)</span><br><span class="line">b = B()</span><br><span class="line">b.add(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(b.n)<span class="comment">#结果为2，说明调用了A的add方法，self还是指B的实例。</span></span><br><span class="line"><span class="built_in">super</span>(B,b).add(<span class="number">2</span>)<span class="comment">#在类外调用B的父类的add函数</span></span><br></pre></td></tr></table></figure>
+<p>多继承的super复杂一些，这里暂不讨论（主要有一个method resolution order，MRO 方法调用顺序）</p>
+<h2 id="常用numpy操作">常用numpy操作</h2>
+<p>NumPy的数组类是ndarray类型</p>
+<h3 id="轴">轴</h3>
+<p>3D空间中的点的坐标<code>[1, 2, 1]</code>具有一个轴。该轴有3个元素，所以我们说它的长度为3. 在下图所示的例子中，数组有2个轴。第一轴的长度为2（可以看到第一个轴是在最外面），第二轴的长度为3。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[ 1., 0., 0.],</span><br><span class="line"> [ 0., 1., 2.]]</span><br></pre></td></tr></table></figure>
+<h3 id="切片">切片</h3>
+<p><strong>一维</strong>的数组可以进行索引、切片和迭代操作，多维数组每个轴都可以仿照一维数组的方式操作。不同的轴操作以逗号隔开。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b = np.array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>],</span><br><span class="line">       [<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">       [<span class="number">30</span>, <span class="number">31</span>, <span class="number">32</span>, <span class="number">33</span>],</span><br><span class="line">       [<span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="number">23</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>:<span class="number">5</span>, <span class="number">1</span>]                       <span class="comment"># each row in the second column of b</span></span><br><span class="line">array([ <span class="number">1</span>, <span class="number">11</span>, <span class="number">21</span>, <span class="number">31</span>, <span class="number">41</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b[ : ,<span class="number">1</span>]                        <span class="comment"># equivalent to the previous example</span></span><br><span class="line">array([ <span class="number">1</span>, <span class="number">11</span>, <span class="number">21</span>, <span class="number">31</span>, <span class="number">41</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="常用api">常用API</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.arange(<span class="number">15</span>) <span class="comment">#[0,15) 步长为1的ndarray类型的数组 np.arange(start, stop, step) [start,stop) 步长为step的数组</span></span><br><span class="line">a.ndim <span class="comment">#数组维度</span></span><br><span class="line">a.dtype <span class="comment">#数组中元素的类型</span></span><br><span class="line">a = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]) <span class="comment">#创建数组，不要忘记[]</span></span><br><span class="line">np.zeros((<span class="number">3</span>,<span class="number">4</span>)) <span class="comment">#3*4大小的初始化为0的数组</span></span><br><span class="line">np.zeros_like(a, dtype = np.uint8) <span class="comment">#初始化大小与a一样的数组，数组内元素类型是unsigned 8位整数。</span></span><br><span class="line"></span><br><span class="line">np.reshape(src, new_size, order = <span class="string">&#x27;C&#x27;</span>/<span class="string">&#x27;F&#x27;</span>)</span><br><span class="line"><span class="comment">#也可以直接src.reshape(new_size, order)</span></span><br><span class="line"><span class="comment">#把src的大小变成new_size(元素个数不变)，按照C顺序或者F顺序。C顺序是从最里面的轴开始读写，而F顺序则是从最外面的轴开始读写。例如[[1, 0, 0],[0, 1, 2]] reshape((3,2))时，从最里面的轴开始，读取顺序为：1,0,0,0,1,2;从最外面的轴开始，读取顺序为：1,0,0,1,0,2</span></span><br><span class="line"><span class="comment">#将size的某一维指定为-1，则会自动计算其大小。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#转置</span></span><br><span class="line"><span class="comment">#若a有三维（ndim=3）size为(3,255,255)</span></span><br><span class="line">a.transpose(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>) <span class="comment">#a变成(255,255,3)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.vstack((a,b,c)) <span class="comment">#垂直堆叠a,b,c三个数组</span></span><br><span class="line">np.hstack((...)) <span class="comment">#水平堆叠</span></span><br><span class="line">np.concatenate((a1,a2,...), axis=<span class="number">0</span>) <span class="comment">#按照给定的axis进行拼接</span></span><br><span class="line"><span class="comment">#拼接对象不一定是ndarray，list也可以</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.stack((a,b)) <span class="comment">#区别在于，stack不会把a,b放到一起，而是相当于额外增加了一个维度</span></span><br></pre></td></tr></table></figure>
+<p><img src="D:\myBlog\source_posts\毕设入门-常用python操作\image1.png" /></p>
+<p><img src="D:\myBlog\source_posts\毕设入门-常用python操作\image2.png" /></p>
+<h3 id="随机数相关">随机数相关</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#np.random.choice(a, size=None, replace=True, p=None)</span></span><br><span class="line"><span class="comment">#从a(只要是ndarray都可以，但必须是一维的)中随机抽取数字，并组成指定大小(size)的数组</span></span><br><span class="line"><span class="comment">#replace:True表示可以取相同数字，False表示不可以取相同数字</span></span><br><span class="line"><span class="comment">#数组p：与数组a相对应，表示取数组a中每个元素的概率，默认为选取每个元素的概率相同。</span></span><br><span class="line">a = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">4</span>]</span><br><span class="line">np.random.choice(a,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="comment">#若如果直接np.random.choice(5),则默认从[0,1,2,3,4]中输出一个随机数</span></span><br><span class="line"><span class="comment">#相当于np.random.randint(0, 5)</span></span><br></pre></td></tr></table></figure>
+<p><img src="D:\myBlog\source_posts\毕设入门-常用python操作\image3.png" /></p>
+<h3 id="神经网络相关">神经网络相关</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">np.pad(array, pad_width, mode=<span class="string">&#x27;constant&#x27;</span>, **kwargs)</span><br><span class="line"><span class="comment">#array:待填充（扩展）的数组</span></span><br><span class="line"><span class="comment">#填充的大小，可以是一个sequence，例如((1,2),(2,1))代表array是二维数组，在第一维的前面填充1，后面填充2，第二维的前面填充2，后面填充1，3*3的数组填充后变成6*6</span></span><br><span class="line">a = np.array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]]) </span><br><span class="line"><span class="comment">#填充后</span></span><br><span class="line">&gt;&gt;&gt;array([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]])</span><br><span class="line"><span class="comment">#填充大小亦可以是(1,2)或者((1,2),),代表对所有维度都在前面填充1，后面填充2.</span></span><br><span class="line"><span class="comment">#填充的大小还可以是一个int数，例如np.pad(a,1)，代表上一中情况下前=后的填充方式，即所有维度都在前面填充=在后面填充=1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#mode：填充的数据，constant:常数，edge:重复边缘数据，wrap:重复环绕,median:中位数,....</span></span><br><span class="line"><span class="comment">#以wrap为例：</span></span><br><span class="line">np.pad(a,((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">2</span>,<span class="number">1</span>)),<span class="string">&#x27;wrap&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;array([[<span class="number">7</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">7</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">6</span>],</span><br><span class="line">       [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="张量操作">张量操作</h2>
+<h3 id="从numpy.ndarray-list等获取tensor">从numpy.ndarray / list等获取tensor</h3>
+<p>tensor和Tensor的区别：</p>
+<ul>
+<li>tensor(x)得到的张量的dtype和device都与x一致，如果x是int64则tensor也是int64. Tensor得到的张量默认为float32</li>
+<li>tensor(x)相当于copy了一次，Tensor(x)与x共享内存空间</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a numpy array</span></span><br><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a tensor using torch.Tensor()</span></span><br><span class="line">y = torch.Tensor(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a tensor using torch.tensor()</span></span><br><span class="line">z = torch.tensor(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print the dtypes and devices of the tensors</span></span><br><span class="line"><span class="built_in">print</span>(y.dtype, y.device) <span class="comment"># output: torch.float32 cpu</span></span><br><span class="line"><span class="built_in">print</span>(z.dtype, z.device) <span class="comment"># output: torch.int64 cpu</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="tensor的运算">tensor的运算</h3>
+<p>设a,b都是2*2的tensor.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数乘</span></span><br><span class="line">a = a*<span class="number">2</span> 或 a = <span class="number">2</span>*a</span><br><span class="line"><span class="comment">#逐元素相加</span></span><br><span class="line">a = a + <span class="number">2</span></span><br><span class="line"><span class="comment">#逐元素对应相乘</span></span><br><span class="line">c = a*b 或 c = torch.mul(a,b)</span><br><span class="line"><span class="comment">#按矩阵形式相乘</span></span><br><span class="line">c = torch.matmul(a,b)</span><br></pre></td></tr></table></figure>
+<h3 id="tensor修改维度">tensor修改维度</h3>
+<p>tensor也可以进行一系列切片操作</p>
+<p>常用的转换tensor维度（转置）的方法是permute</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意：np.transpose 和 tensor.permute (这里的np和tensor都是某个实例) 都可以任意打乱维度</span></span><br><span class="line"><span class="comment">#而tensor.transpose()只能交换两个维度</span></span><br><span class="line"><span class="comment">#permute只能由tensor实例调用，不能torch.permute</span></span><br></pre></td></tr></table></figure>
+<p>常用的增删tensor维度（size=1）的方法是：(尤其是dim=0,经常在AI代码中看到)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把(2,2)矩阵张量变成 (1,2,2)</span></span><br><span class="line">tensor.unsqueeze(<span class="number">0</span>) / torch.unsqueeze(tensor, dim= <span class="number">0</span>)</span><br><span class="line"><span class="comment">#把(1,2,2)变成(2,2)</span></span><br><span class="line">tensor.squeeze(<span class="number">0</span>) / torch.squeeze(tensor, dim= <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="einops库">einops库</h3>
+<p>常用于转换张量维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = rearrange(x, <span class="string">&#x27;b c h w -&gt; b h w c&#x27;</span>) <span class="comment">#相当于y = x.transpose(0, 2, 3, 1)</span></span><br><span class="line"><span class="comment">#&#x27;b c h w&#x27;: batch, channel, height, width</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342675997">PyTorch 70.einops：优雅地操作张量维度 - 知乎 (zhihu.com)</a></p>
+<h2 id="图像预处理">图像预处理</h2>
+<h3 id="torchvision.transforms库">torchvision.transforms库</h3>
+<p>使用例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">self.images_transform = transforms.Compose([</span><br><span class="line">                                            img_norm,</span><br><span class="line">                                            transforms.Resize((<span class="number">112</span>, <span class="number">112</span>)), </span><br><span class="line">                                            channel_first</span><br><span class="line">                                        ])</span><br><span class="line"><span class="comment">#img_norm,channel_first均为自定义函数</span></span><br><span class="line">transforms.Compose有点像nn.Sequential，把一系列变换组合起来。</span><br></pre></td></tr></table></figure>
+<p>常见的transforms库中的变换：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transforms.Resize(size) <span class="comment">#size可以是int，代表h,w相同，也可以是(h,w)</span></span><br><span class="line">transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>]) <span class="comment">#按照ImageNet的统计数据标准化三通道图像</span></span><br><span class="line">transforms.Scale(size) <span class="comment">#size只能是int，传入图像的最短边的长度。 等比例放缩</span></span><br><span class="line">transforms.CenterCrop(size) <span class="comment">#size可以是int，从中心点出发，按照size裁剪图像</span></span><br><span class="line">transforms.ToTensor(img) <span class="comment">#把 ndarray 或 PILimage 转化为tensor，注意转化的过程中uint8会自动变成float32,即图像空间转移到[0,1]</span></span><br><span class="line">transforms.ToPILImage(img) <span class="comment">#把ndarray或tensor变成PIL image类型</span></span><br></pre></td></tr></table></figure>
+<h3 id="from-pil-import-image">from PIL import Image</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开图像</span></span><br><span class="line">im = Image.<span class="built_in">open</span>(in_path)</span><br><span class="line"><span class="comment">#保存图像(提供第二个参数，以显式指定文件格式。)</span></span><br><span class="line">im.save(out_path)</span><br><span class="line"><span class="comment">#把ndarray变成PIL Image类型</span></span><br><span class="line">im1 = Image.fromarray(array)</span><br><span class="line"><span class="comment">#拆分通道</span></span><br><span class="line">r, g, b = im.split()</span><br><span class="line"><span class="comment">#转换为RGB空间[0,255]</span></span><br><span class="line">im1 = im1.convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io">Aurora</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/">https://lyh1028.github.io/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lyh1028.github.io" target="_blank">Aurora-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python-pytorch-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">python;pytorch;人工智能</a></div><div class="post_share"><div class="social-share" data-image="/img/kid1412_avatar1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/04/diffusion%E6%A8%A1%E5%9E%8B/" title="diffusion模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">diffusion模型</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/kid1412_avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aurora</div><div class="author-info__description">世之奇伟瑰怪非常之观，常在于险远，而人之所罕至焉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyh1028"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/liyh373@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python-%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">python-类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">类的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E7%BB%A7%E6%89%BF"><span class="toc-number">1.2.</span> <span class="toc-text">类的简单继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8numpy%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">常用numpy操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%B4"><span class="toc-number">2.1.</span> <span class="toc-text">轴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E7%89%87"><span class="toc-number">2.2.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8api"><span class="toc-number">2.3.</span> <span class="toc-text">常用API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-number">2.4.</span> <span class="toc-text">随机数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="toc-number">2.5.</span> <span class="toc-text">神经网络相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">张量操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8Enumpy.ndarray-list%E7%AD%89%E8%8E%B7%E5%8F%96tensor"><span class="toc-number">3.1.</span> <span class="toc-text">从numpy.ndarray &#x2F; list等获取tensor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tensor%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.2.</span> <span class="toc-text">tensor的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tensor%E4%BF%AE%E6%94%B9%E7%BB%B4%E5%BA%A6"><span class="toc-number">3.3.</span> <span class="toc-text">tensor修改维度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#einops%E5%BA%93"><span class="toc-number">3.4.</span> <span class="toc-text">einops库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">图像预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#torchvision.transforms%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">torchvision.transforms库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#from-pil-import-image"><span class="toc-number">4.2.</span> <span class="toc-text">from PIL import Image</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/" title="毕设入门-常用python操作">毕设入门-常用python操作</a><time datetime="2023-04-25T01:11:19.000Z" title="发表于 2023-04-25 09:11:19">2023-04-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/04/diffusion%E6%A8%A1%E5%9E%8B/" title="diffusion模型">diffusion模型</a><time datetime="2023-04-04T06:45:17.000Z" title="发表于 2023-04-04 14:45:17">2023-04-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/23/%E6%9C%BA%E8%AF%95%E8%8C%83%E5%9B%B4%E7%9A%84%E6%95%B0%E7%BB%84/" title="机试范围的数组">机试范围的数组</a><time datetime="2023-03-23T08:31:05.000Z" title="发表于 2023-03-23 16:31:05">2023-03-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/21/%E5%9B%9E%E6%96%87%E4%B8%B2%E4%B8%93%E9%A2%98/" title="回文串专题">回文串专题</a><time datetime="2023-03-21T07:03:01.000Z" title="发表于 2023-03-21 15:03:01">2023-03-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/15/%E5%9F%BA%E7%A1%80%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95/" title="基础图论算法">基础图论算法</a><time datetime="2023-03-15T08:03:11.000Z" title="发表于 2023-03-15 16:03:11">2023-03-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Aurora</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
