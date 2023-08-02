@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CS231n-assignment1部分笔记 | Aurora-Blog</title><meta name="author" content="Aurora"><meta name="copyright" content="Aurora"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Overview聚焦于图像分类，目标检测等 python常见的矩阵操作(针对np.array)矩阵索引： 12345A[[0,1],[0,1]]--&gt;相当于[A[0][0],A[1][1]],注意不能写成A[[0,1]][[0,1]]B &#x3D; A[[0,1,2]]--&gt;相当于取矩阵A第一维的0,1,2三个下标共同组成的元素，注意，A[[0]]矩阵维度不变（而A[0]则会降一维）A[[0,">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CS231n-assignment1部分笔记 | Aurora-Blog</title><meta name="author" content="Aurora"><meta name="copyright" content="Aurora"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Overview 聚焦于图像分类，目标检测等 python常见的矩阵操作(针对np.array) 矩阵索引： 12345A[[0,1],[0,1]]--&gt;相当于[A[0][0],A[1][1]],注意不能写成A[[0,1]][[0,1]]B &#x3D; A[[0,1,2]]--&gt;相当于取矩阵A第一维的0,1,2三个下标共同组成的元素，注意，A[[0]]矩阵维度不变（而A[0]则会降一维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS231n-assignment1部分笔记">
 <meta property="og:url" content="https://lyh1028.github.io/2023/05/28/CS231n-1/index.html">
 <meta property="og:site_name" content="Aurora-Blog">
-<meta property="og:description" content="Overview聚焦于图像分类，目标检测等 python常见的矩阵操作(针对np.array)矩阵索引： 12345A[[0,1],[0,1]]--&gt;相当于[A[0][0],A[1][1]],注意不能写成A[[0,1]][[0,1]]B &#x3D; A[[0,1,2]]--&gt;相当于取矩阵A第一维的0,1,2三个下标共同组成的元素，注意，A[[0]]矩阵维度不变（而A[0]则会降一维）A[[0,">
+<meta property="og:description" content="Overview 聚焦于图像分类，目标检测等 python常见的矩阵操作(针对np.array) 矩阵索引： 12345A[[0,1],[0,1]]--&gt;相当于[A[0][0],A[1][1]],注意不能写成A[[0,1]][[0,1]]B &#x3D; A[[0,1,2]]--&gt;相当于取矩阵A第一维的0,1,2三个下标共同组成的元素，注意，A[[0]]矩阵维度不变（而A[0]则会降一维">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://lyh1028.github.io/img/kid1412_avatar1.jpg">
 <meta property="article:published_time" content="2023-05-28T08:20:00.000Z">
@@ -155,18 +155,15 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/kid1412_avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Aurora-Blog"><span class="site-name">Aurora-Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS231n-assignment1部分笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-28T08:20:00.000Z" title="发表于 2023-05-28 16:20:00">2023-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-07T08:24:29.682Z" title="更新于 2023-06-07 16:24:29">2023-06-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS231n-assignment1部分笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>聚焦于图像分类，目标检测等</p>
-<h2 id="python常见的矩阵操作-针对np-array"><a href="#python常见的矩阵操作-针对np-array" class="headerlink" title="python常见的矩阵操作(针对np.array)"></a>python常见的矩阵操作(针对np.array)</h2><p>矩阵索引：</p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/kid1412_avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Aurora-Blog"><span class="site-name">Aurora-Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS231n-assignment1部分笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-28T08:20:00.000Z" title="发表于 2023-05-28 16:20:00">2023-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-07T08:24:29.682Z" title="更新于 2023-06-07 16:24:29">2023-06-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS231n-assignment1部分笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="overview">Overview</h2>
+<p>聚焦于图像分类，目标检测等</p>
+<h2 id="python常见的矩阵操作针对np.array">python常见的矩阵操作(针对np.array)</h2>
+<p>矩阵索引：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A[[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>]]--&gt;相当于[A[<span class="number">0</span>][<span class="number">0</span>],A[<span class="number">1</span>][<span class="number">1</span>]],注意不能写成A[[<span class="number">0</span>,<span class="number">1</span>]][[<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line">B = A[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]]--&gt;相当于取矩阵A第一维的<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>三个下标共同组成的元素，注意，A[[<span class="number">0</span>]]矩阵维度不变（而A[<span class="number">0</span>]则会降一维）</span><br><span class="line">A[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]][<span class="number">0</span>]--&gt;相当于B[<span class="number">0</span>]</span><br><span class="line"><span class="comment">#对A[0,y[0]],...,A[n-1,y[n-1]]同时赋值：</span></span><br><span class="line">A[<span class="built_in">range</span>(n),y] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>常用矩阵操作：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">np.argsort(a) <span class="comment">#--&gt;得到数组a的从小到大排序的下标</span></span><br><span class="line">np.maximum(X, Y, out=<span class="literal">None</span>) <span class="comment">#X 与 Y 逐位比较取其大者,最少接收两个参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#按列遍历矩阵A: *A相当于把外层解引用了，[[1,2,3],[4,5,6]]变成了[1,2,3],[4,5,6]</span></span><br><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> <span class="built_in">zip</span>(*A):</span><br><span class="line">    <span class="built_in">print</span>(col) <span class="comment"># col 是tuple类型的</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="图像分类"><a href="#图像分类" class="headerlink" title="图像分类"></a>图像分类</h2><p>鲁棒性：illumination，deformation，occlusion(遮挡)，background clutter(背景混乱)，intraclass variation(类内差异)</p>
+<h2 id="图像分类">图像分类</h2>
+<p>鲁棒性：illumination，deformation，occlusion(遮挡)，background clutter(背景混乱)，intraclass variation(类内差异)</p>
 <p>数据驱动——例如要辨别猫，就收集许多猫的图片训练网络识别</p>
 <p>最simple的分类器：K Nearest Neighbor</p>
 <ul>
@@ -175,65 +172,79 @@
 <li>训练时间:O(1)</li>
 <li>预测时间:O(N)</li>
 <li>bad——我们希望预测时间少，而训练时间可以相对多一些；维度灾难（KNN需要训练集稠密，所以需要的训练数据随维度而指数增加）</li>
-<li>超参数： K，距离函数<ul>
+<li>超参数： K，距离函数
+<ul>
 <li>错误做法：</li>
-<li>只分训练集，选择训练集表现最好的超参数（过拟合，例如K&#x3D;1）</li>
+<li>只分训练集，选择训练集表现最好的超参数（过拟合，例如K=1）</li>
 <li>分训练集和测试集，选择测试集表现最好的超参数（有偶然性）</li>
-</ul>
-</li>
+</ul></li>
 <li>分训练集，验证集，测试集：训练集训练，验证集评估，选择验证集表现最好的超参数，并且在测试集上测试。</li>
 </ul>
 <p>CIFAR 10：10个类，五万张训练，一万张测试</p>
 <ul>
-<li>k折交叉验证（小数据集中常用）<ul>
+<li>k折交叉验证（小数据集中常用）
+<ul>
 <li>数据集分训练-验证-测试，把训练集分成n部分，每次取一部分作为验证集，剩下n-1部分作为训练集；测试集在每个folds上不变</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="距离函数"><a href="#距离函数" class="headerlink" title="距离函数"></a>距离函数</h3><p>L1距离 边界倾向于平行坐标轴</p>
-<p>使用L1&#x2F;L2距离函数衡量图像是否相似是不合适的</p>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>从线性回归到神经网络——</p>
+<h3 id="距离函数">距离函数</h3>
+<p>L1距离 边界倾向于平行坐标轴</p>
+<p>使用L1/L2距离函数衡量图像是否相似是不合适的</p>
+<h2 id="线性回归">线性回归</h2>
+<p>从线性回归到神经网络——</p>
 <p>开发一种新的分类方式：包含score function 和 loss function. （将原始数据映射到类别分数的分数函数，以及量化预测分数和地面实况标签之间一致性的损失函数）然后我们将把它转化为一个优化问题，我们将最小化关于得分函数参数的损失函数。</p>
-<p>以CIFAR-10数据集为例，类别有10类，图片为32*32*3&#x3D;3072个像素，我们可以把图片看做高维空间中的一个点(例如3072维空间中的点)<br>$$<br>f(x_i, W,b) &#x3D; Wx_i+b<br>$$<br>$x_i$ flatten的图片(3072*1)，$W$ 参数矩阵，也叫weights(10*3072)，$b$ bias vector(10*1)</p>
+<p>以CIFAR-10数据集为例，类别有10类，图片为32*32*3=3072个像素，我们可以把图片看做高维空间中的一个点(例如3072维空间中的点) <span class="math display">\[
+f(x_i, W,b) = Wx_i+b
+\]</span> <span class="math inline">\(x_i\)</span> flatten的图片(3072*1)，<span class="math inline">\(W\)</span> 参数矩阵，也叫weights(10*3072)，<span class="math inline">\(b\)</span> bias vector(10*1)</p>
 <p>对W的解释：</p>
 <ul>
 <li>W代表图片像素的“权重”，例如属于ship的图的蓝色通道的权重可能会大，因为轮船通常与水相关</li>
-<li>W代表一种类别的template(模板)，$Wx_i$相当于图片与模板做点乘，分数越大说明图片和这个类别的模板越匹配；线性回归也是一种“template matching”.</li>
+<li>W代表一种类别的template(模板)，<span class="math inline">\(Wx_i\)</span>相当于图片与模板做点乘，分数越大说明图片和这个类别的模板越匹配；线性回归也是一种“template matching”.</li>
 </ul>
 <p>单纯可视化模板：</p>
-<p><img src="/image-20230524204138634.png" alt="image-20230524204138634"></p>
+<figure>
+<img src="image-20230524204138634.png" alt="image-20230524204138634" /><figcaption aria-hidden="true">image-20230524204138634</figcaption>
+</figure>
 <p>训练技巧：把x拓展一维，变成3073*1，拓展出的那一维始终为1，而W拓展一维，拓展出的那一维就是b</p>
 <p>数据预处理：把图像空间从[0,255]压缩到[-1,1]</p>
-<h3 id="SVM-loss"><a href="#SVM-loss" class="headerlink" title="SVM loss"></a>SVM loss</h3><p>SVM loss &#x3D; Data loss + Regularization loss</p>
-<h4 id="Data-loss"><a href="#Data-loss" class="headerlink" title="Data loss"></a>Data loss</h4><p>我们假设s是评估函数$f(x_i,W)$的结果，$s_1,…,s_j,…s_{10}$对应第1,…,j,…10个类的评分（分数越大，越接近该类）</p>
-<p>SVM“希望”每个图像的正确类别的分数比不正确的类别高一些固定的边际值$\Delta$ ，如果高于$\Delta$，则损失记为0，如下：</p>
-<p>设$s_{y_i}$为第i个图像的正确类别，$L_i$为第i张图的损失，data loss &#x3D; $\frac 1n \sum_{i&#x3D;1}^n L_i$<br>$$<br>L_i &#x3D; \sum_{j\neq y_i}\max(0,s_j - s_{y_i} + \Delta)<br>$$<br>$\max(0,-)$的形式的损失又被称为 hinge loss ;   squared hinge loss(L2-SVM) ：$\max(0,-)^2$</p>
-<h4 id="Regularization-loss"><a href="#Regularization-loss" class="headerlink" title="Regularization loss"></a>Regularization loss</h4><p>可能存在许多不同的W，都满足data loss 最小。</p>
+<h3 id="svm-loss">SVM loss</h3>
+<p>SVM loss = Data loss + Regularization loss</p>
+<h4 id="data-loss">Data loss</h4>
+<p>我们假设s是评估函数<span class="math inline">\(f(x_i,W)\)</span>的结果，<span class="math inline">\(s_1,...,s_j,...s_{10}\)</span>对应第1,...,j,...10个类的评分（分数越大，越接近该类）</p>
+<p>SVM“希望”每个图像的正确类别的分数比不正确的类别高一些固定的边际值<span class="math inline">\(\Delta\)</span> ，如果高于<span class="math inline">\(\Delta\)</span>，则损失记为0，如下：</p>
+<p>设<span class="math inline">\(s_{y_i}\)</span>为第i个图像的正确类别，<span class="math inline">\(L_i\)</span>为第i张图的损失，data loss = <span class="math inline">\(\frac 1n \sum_{i=1}^n L_i\)</span> <span class="math display">\[
+L_i = \sum_{j\neq y_i}\max(0,s_j - s_{y_i} + \Delta)
+\]</span> <span class="math inline">\(\max(0,-)\)</span>的形式的损失又被称为 hinge loss ; squared hinge loss(L2-SVM) ：<span class="math inline">\(\max(0,-)^2\)</span></p>
+<h4 id="regularization-loss">Regularization loss</h4>
+<p>可能存在许多不同的W，都满足data loss 最小。</p>
 <p>此时加入正则化项：正则化损失是W中每个元素的平方和(×λ)。（L2-Regularization）</p>
-<p>“ L2 penalty prefers smaller and more diffuse weight vectors”——有利于考虑更多的dimension，减少过拟合。</p>
-<h3 id="Softmax-loss"><a href="#Softmax-loss" class="headerlink" title="Softmax loss"></a>Softmax loss</h3><p>指数处理+归一化<br>$$<br>f_i &#x3D; f(x_i,W)<a href="%E7%AC%ACi%E4%B8%AA%E7%B1%BB%E5%88%AB%E7%9A%84%E5%88%86%E6%95%B0">i</a>,,L_i &#x3D; -\log \frac{e^{f_{y_i}}}{\sum_j e^{f_j}}<br>$$</p>
-<h4 id="不同观点下的Softmax-loss"><a href="#不同观点下的Softmax-loss" class="headerlink" title="不同观点下的Softmax loss"></a>不同观点下的Softmax loss</h4><ul>
-<li><p>信息论角度</p>
+<p>" L2 penalty prefers smaller and more diffuse weight vectors"——有利于考虑更多的dimension，减少过拟合。</p>
+<h3 id="softmax-loss">Softmax loss</h3>
+<p>指数处理+归一化 <span class="math display">\[
+f_i = f(x_i,W)[i](第i个类别的分数),\,L_i = -\log \frac{e^{f_{y_i}}}{\sum_j e^{f_j}}
+\]</span></p>
+<h4 id="不同观点下的softmax-loss">不同观点下的Softmax loss</h4>
 <ul>
-<li>ground truth 分布p和估计的分布q  的互信息：$H(p,q) &#x3D; -\sum_x p(x)\log q(x) &#x3D; H(p) + D_{KL}(p||q)$</li>
+<li>信息论角度
+<ul>
+<li>ground truth 分布p和估计的分布q 的互信息：<span class="math inline">\(H(p,q) = -\sum_x p(x)\log q(x) = H(p) + D_{KL}(p||q)\)</span></li>
 <li>最小化交叉熵就是最小化KL散度</li>
-</ul>
-</li>
-<li><p>概率论角度</p>
+</ul></li>
+<li>概率论角度
 <ul>
 <li>最大似然估计</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="实际应用中的数据处理"><a href="#实际应用中的数据处理" class="headerlink" title="实际应用中的数据处理"></a>实际应用中的数据处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = np.array([<span class="number">123</span>, <span class="number">456</span>, <span class="number">789</span>]) <span class="comment"># example with 3 classes and each having large scores</span></span><br><span class="line">p = np.exp(f) / np.<span class="built_in">sum</span>(np.exp(f)) <span class="comment"># Bad: Numeric problem, potential blowup</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># instead: first shift the values of f so that the highest number is 0:</span></span><br><span class="line">f -= np.<span class="built_in">max</span>(f) <span class="comment"># f becomes [-666, -333, 0]</span></span><br><span class="line">p = np.exp(f) / np.<span class="built_in">sum</span>(np.exp(f)) <span class="comment"># safe to do, gives the correct answer</span></span><br></pre></td></tr></table></figure>
-
+<h4 id="实际应用中的数据处理">实际应用中的数据处理</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = np.array([<span class="number">123</span>, <span class="number">456</span>, <span class="number">789</span>]) <span class="comment"># example with 3 classes and each having large scores</span></span><br><span class="line">p = np.exp(f) / np.<span class="built_in">sum</span>(np.exp(f)) <span class="comment"># Bad: Numeric problem, potential blowup</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># instead: first shift the values of f so that the highest number is 0:</span></span><br><span class="line">f -= np.<span class="built_in">max</span>(f) <span class="comment"># f becomes [-666, -333, 0]</span></span><br><span class="line">p = np.exp(f) / np.<span class="built_in">sum</span>(np.exp(f)) <span class="comment"># safe to do, gives the correct answer</span></span><br></pre></td></tr></table></figure>
 <p>防止数据溢出，先减去最大值，再处理，不会影响最后结果。</p>
-<p><img src="/image-20230530211337180.png"></p>
-<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>单纯的numerical gradient计算：</p>
-<p>h是一个非常小的数，用$[f(x+h) - f(x-h)] &#x2F; 2h$ 效果更好。</p>
-<p>sigmod函数的导数：$f(x)(1-f(x))$</p>
+<p><img src="image-20230530211337180.png" /></p>
+<h2 id="optimization">Optimization</h2>
+<p>单纯的numerical gradient计算：</p>
+<p>h是一个非常小的数，用<span class="math inline">\([f(x+h) - f(x-h)] / 2h\)</span> 效果更好。</p>
+<p>sigmod函数的导数：<span class="math inline">\(f(x)(1-f(x))\)</span></p>
 <p>梯度图：</p>
-<p><img src="/image-20230527201232569.png"></p>
+<p><img src="image-20230527201232569.png" /></p>
 <p>可以据此计算反向传播的梯度</p>
 <p>一个节点有多个上游分支时，该节点的梯度是所有上游分支回传的梯度之和。</p>
 <p>常用gate：</p>
@@ -242,31 +253,81 @@
 <li>max gate：gradient router（只有最大的那条边上有梯度，剩下的边梯度变为0）</li>
 <li>mul gate：gradient switcher（x*y，则传过来的梯度在y的边上乘x，在x的边上乘y）</li>
 </ul>
-<h3 id="向量-x2F-矩阵求导"><a href="#向量-x2F-矩阵求导" class="headerlink" title="向量&#x2F;矩阵求导"></a>向量&#x2F;矩阵求导</h3><p>$$<br>以f(x;W) &#x3D; ||Wx||^2为例,设q &#x3D; Wx<br>$$</p>
-<p><img src="/image-20230528134003498.png"></p>
-<h3 id="列向量对列向量求导"><a href="#列向量对列向量求导" class="headerlink" title="列向量对列向量求导"></a>列向量对列向量求导</h3><p>$\vec y &#x3D; W \vec x$ 其中y是size为C的列向量，x是size为D的列向量，则y对x求导得到的是C*D的矩阵，矩阵的第i行是$y_i$对$x_1,…,x_D$的导数。这样就把向量求导换成了标量求导。</p>
-<p>例如：<br>$$<br>\frac{\part y_2}{\part x_5} &#x3D; \frac{\part(W_{21}x_1+W_{22}x_2+…+W_{2D}x_D)}{x_5} &#x3D; W_{25},推广有:\frac{\part{y_i}}{\part{x_j}} &#x3D; W_{i,j}\<br>所以\frac{\part \vec y}{\part \vec x} &#x3D; W<br>$$<br>把$y_i$对$\vec x$求导的结果<strong>按列排列</strong>，得到以下矩阵（就是W）：</p>
-<p><img src="/image-20230607145303573.png" alt="image-20230607145303573"></p>
-<h3 id="行向量对行向量求导"><a href="#行向量对行向量求导" class="headerlink" title="行向量对行向量求导"></a>行向量对行向量求导</h3><p>$\vec y &#x3D; \vec x W$, y是size&#x3D;C的行向量，x是size&#x3D;D的行向量，W是D*C的矩阵，同样先看标量求导是什么：<br>$$<br>\frac{\part y_2}{\part x_5} &#x3D; \frac{\part \sum_{i&#x3D;1}^Dx_i W_{i,2}}{\part x_5} &#x3D; W_{5,2},推广有:\frac{\part{y_i}}{\part{x_j}} &#x3D; W_{j,i}\<br>\y为行向量，把y_i对\vec x求导的结果按行排列:(以2*2为例)\<br>\left [ \begin{matrix}<br>\frac{\part y_1}{\part x_1} &amp; \frac{\part y_2}{\part x_1}\<br>\frac{\part y_1}{\part x_2} &amp; \frac{\part y_2}{\part x_2}<br>\end{matrix}\right] &#x3D; \left [ \begin{matrix}<br>W_{11} &amp; W_{12}\<br>W_{21} &amp; W_{22}<br>\end{matrix}\right] &#x3D; W<br>$$</p>
-<h3 id="列向量对矩阵求导"><a href="#列向量对矩阵求导" class="headerlink" title="列向量对矩阵求导"></a>列向量对矩阵求导</h3><p>本来y对W求导是一个三维的，但是里面包含许多0，实际我们可以用二维矩阵代替：<br>$$<br>\frac{\part y_k}{\part W_{i,j}} &#x3D; x_j ,\mathbf{if},,i&#x3D;k ,\mathbf{else}, ,0<br>$$<br>所以我们只需保留$\part y_1&#x2F;\part W_{1j},\part y_2&#x2F; \part W_{2j},…$</p>
-<p>因为y是一个列向量，我们把$\part y_i &#x2F;\part W_{ij}(j&#x3D;1,2,…,D)$按列排列，即作为矩阵的每一行，最后得到结果为：<br>$$<br>\left [ \begin{matrix}<br>x^T\ x^T \ … \  x^T<br>\end{matrix}\right], x^T是是1*D的行向量，整个矩阵一共有C行<br>$$</p>
-<h3 id="softmax-loss-和-hinge-loss的导数"><a href="#softmax-loss-和-hinge-loss的导数" class="headerlink" title="softmax loss 和 hinge loss的导数"></a>softmax loss 和 hinge loss的导数</h3><p>对下式求导：</p>
-<p>这里$w^T_j$ 是W的第j列的转置，也就是1*D，$x_i$ 是D*1的列向量</p>
-<p><img src="/image-20230529160728612.png" alt="image-20230529160728612"></p>
-<p>$w_j^Tx_i - w_{y_i}^Tx_i + \Delta &gt;0$时，$L_i$才和$w_{y_i}^T,w_j^T$有关系。所以有下式：</p>
+<h3 id="向量矩阵求导">向量/矩阵求导</h3>
+<p><span class="math display">\[
+以f(x;W) = ||Wx||^2为例,设q = Wx
+\]</span></p>
+<p><img src="image-20230528134003498.png" /></p>
+<h3 id="列向量对列向量求导">列向量对列向量求导</h3>
+<p><span class="math inline">\(\vec y = W \vec x\)</span> 其中y是size为C的列向量，x是size为D的列向量，则y对x求导得到的是C*D的矩阵，矩阵的第i行是<span class="math inline">\(y_i\)</span>对<span class="math inline">\(x_1,...,x_D\)</span>的导数。这样就把向量求导换成了标量求导。</p>
+<p>例如： <span class="math display">\[
+\frac{\part y_2}{\part x_5} = \frac{\part(W_{21}x_1+W_{22}x_2+...+W_{2D}x_D)}{x_5} = W_{25},推广有:\frac{\part{y_i}}{\part{x_j}} = W_{i,j}\\
+所以\frac{\part \vec y}{\part \vec x} = W
+\]</span> 把<span class="math inline">\(y_i\)</span>对<span class="math inline">\(\vec x\)</span>求导的结果<strong>按列排列</strong>，得到以下矩阵（就是W）：</p>
+<figure>
+<img src="/image-20230607145303573.png" alt="image-20230607145303573" /><figcaption aria-hidden="true">image-20230607145303573</figcaption>
+</figure>
+<h3 id="行向量对行向量求导">行向量对行向量求导</h3>
+<p><span class="math inline">\(\vec y = \vec x W\)</span>, y是size=C的行向量，x是size=D的行向量，W是D*C的矩阵，同样先看标量求导是什么： <span class="math display">\[
+\frac{\part y_2}{\part x_5} = \frac{\part \sum_{i=1}^Dx_i W_{i,2}}{\part x_5} = W_{5,2},推广有:\frac{\part{y_i}}{\part{x_j}} = W_{j,i}\\
+\\y为行向量，把y_i对\vec x求导的结果按行排列:(以2*2为例)\\
+\left [ \begin{matrix}
+\frac{\part y_1}{\part x_1} &amp; \frac{\part y_2}{\part x_1}\\
+\frac{\part y_1}{\part x_2} &amp; \frac{\part y_2}{\part x_2}
+\end{matrix}\right] = \left [ \begin{matrix}
+W_{11} &amp; W_{12}\\
+W_{21} &amp; W_{22}
+\end{matrix}\right] = W
+\]</span></p>
+<h3 id="列向量对矩阵求导">列向量对矩阵求导</h3>
+<p>本来y对W求导是一个三维的，但是里面包含许多0，实际我们可以用二维矩阵代替： <span class="math display">\[
+\frac{\part y_k}{\part W_{i,j}} = x_j \,\mathbf{if}\,\,i=k \,\mathbf{else}\, \,0
+\]</span> 所以我们只需保留<span class="math inline">\(\part y_1/\part W_{1j},\part y_2/ \part W_{2j},...\)</span></p>
+<p>因为y是一个列向量，我们把<span class="math inline">\(\part y_i /\part W_{ij}(j=1,2,...,D)\)</span>按列排列，即作为矩阵的每一行，最后得到结果为： <span class="math display">\[
+\left [ \begin{matrix}
+x^T\\ x^T \\ ... \\  x^T
+\end{matrix}\right], x^T是是1*D的行向量，整个矩阵一共有C行
+\]</span></p>
+<h3 id="softmax-loss-和-hinge-loss的导数">softmax loss 和 hinge loss的导数</h3>
+<p>对下式求导：</p>
+<p>这里<span class="math inline">\(w^T_j\)</span> 是W的第j列的转置，也就是1*D，<span class="math inline">\(x_i\)</span> 是D*1的列向量</p>
+<figure>
+<img src="image-20230529160728612.png" alt="image-20230529160728612" /><figcaption aria-hidden="true">image-20230529160728612</figcaption>
+</figure>
+<p><span class="math inline">\(w_j^Tx_i - w_{y_i}^Tx_i + \Delta &gt;0\)</span>时，<span class="math inline">\(L_i\)</span>才和<span class="math inline">\(w_{y_i}^T,w_j^T\)</span>有关系。所以有下式：</p>
 <p>括号内表示，记算所有不同于真值标签yi的、data loss&gt;0的标签j的个数。</p>
-<p><img src="/image-20230529161157099.png" alt="image-20230529161157099"></p>
-<p><img src="/image-20230529161210629.png" alt="image-20230529161210629"></p>
-<p>对SoftmaxLoss（如下）求导：其中i代表第i个样本，yi代表true label，j代表其他所有的label，$f_j$代表第i个样本j label的得分。（注意是第i个样本的，不是所有的）<br>$$<br>L_i &#x3D; -\log \frac{e^{f_{y_i}}}{\sum_j e^{f_j}} &#x3D; -{f_{y_i}} + \ln \sum_j e^{f_j}<br>$$<br>$f(W,x) &#x3D; XW$ X:(N,D); W:(D,C)，则$f_j &#x3D; w_j^Tx_i$ </p>
-<p>$$<br>L_i &#x3D; -w^T_{y_i}x_i + \ln\left(\sum_j e^{w^T_jx_i}\right)\<br>\frac{\part L_i}{\part w_{y_i}} &#x3D; -x_i + \frac{x_i e^{w^T_{y_i}x_i}}{\sum_j e^{w^T_j x_i}}\<br>\frac{\part L_i}{\part w_{j}} &#x3D; \frac{x_i e^{w^T_{y_i}x_i}}{\sum_j e^{w^T_j x_i}} &#x3D;\frac{\part L_i}{\part w_{y_i}} + x_i<br>$$</p>
+<figure>
+<img src="image-20230529161157099.png" alt="image-20230529161157099" /><figcaption aria-hidden="true">image-20230529161157099</figcaption>
+</figure>
+<figure>
+<img src="image-20230529161210629.png" alt="image-20230529161210629" /><figcaption aria-hidden="true">image-20230529161210629</figcaption>
+</figure>
+<p>对SoftmaxLoss（如下）求导：其中i代表第i个样本，yi代表true label，j代表其他所有的label，<span class="math inline">\(f_j\)</span>代表第i个样本j label的得分。（注意是第i个样本的，不是所有的） <span class="math display">\[
+L_i = -\log \frac{e^{f_{y_i}}}{\sum_j e^{f_j}} = -{f_{y_i}} + \ln \sum_j e^{f_j}
+\]</span> <span class="math inline">\(f(W,x) = XW\)</span> X:(N,D); W:(D,C)，则<span class="math inline">\(f_j = w_j^Tx_i\)</span></p>
+<p><span class="math display">\[
+L_i = -w^T_{y_i}x_i + \ln\left(\sum_j e^{w^T_jx_i}\right)\\
+\frac{\part L_i}{\part w_{y_i}} = -x_i + \frac{x_i e^{w^T_{y_i}x_i}}{\sum_j e^{w^T_j x_i}}\\
+\frac{\part L_i}{\part w_{j}} = \frac{x_i e^{w^T_{y_i}x_i}}{\sum_j e^{w^T_j x_i}} =\frac{\part L_i}{\part w_{y_i}} + x_i
+\]</span></p>
 <p><strong>另一种求导方式（忘掉上面所有的东西，从维度上考虑）</strong>：</p>
 <p>例1：</p>
-<p>score &#x3D; XW + b，其中X,W,b的大小分别为$N\times D$,$D\times C$,$1\times C$<br>$$<br>\frac{dL}{dW} &#x3D; \frac{dL}{d,score}<em>\frac{d,score}{dW},从维度看:\<br>dL&#x2F;dW一定是D</em>C的(标量对矩阵求导),所以(N<em>C) * \frac{d,score}{dW} &#x3D; D</em>C\<br>所以, \frac{d,score}{dW}是D<em>N的，因为只有(D</em>N)<em>(N</em>C) &#x3D; D*C<br>$$</p>
-<p>$$<br>所以,\frac{dL}{dW} &#x3D; X^T \frac{dL}{d,score}<br>$$</p>
-<p>$$<br>同理,\frac{dL}{dX} &#x3D; N<em>D &#x3D; (N</em>C)(C*D) &#x3D; \frac{dL}{d ,score} *W^T<br>$$</p>
-<p>$$<br>\frac{dL}{db} &#x3D; 1<em>C &#x3D; (1</em>N)(N*C) &#x3D; dscore对第一维求和<br>$$</p>
-<p>(原因：s &#x3D; xw + b, dL&#x2F;db本来等于1，但由于是矩阵，应为一个向量，而dL&#x2F;db &#x3D; dL&#x2F;ds * ds&#x2F;db &#x3D; dL&#x2F;ds (如果都是数值)，dL&#x2F;ds相当于从计算图的下游回传过来的梯度，我们直接把这个梯度矩阵对第一维求和即得到真正的矩阵形式的dL&#x2F;db )</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io">Aurora</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io/2023/05/28/CS231n-1/">https://lyh1028.github.io/2023/05/28/CS231n-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lyh1028.github.io" target="_blank">Aurora-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post_share"><div class="social-share" data-image="/img/kid1412_avatar1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/07/14/Transformer/" title="Transformer"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Transformer</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/" title="毕设入门-常用python操作"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">毕设入门-常用python操作</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/kid1412_avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aurora</div><div class="author-info__description">世之奇伟瑰怪非常之观，常在于险远，而人之所罕至焉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyh1028"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/liyh373@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E5%B8%B8%E8%A7%81%E7%9A%84%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C-%E9%92%88%E5%AF%B9np-array"><span class="toc-number">2.</span> <span class="toc-text">python常见的矩阵操作(针对np.array)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">距离函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">4.</span> <span class="toc-text">线性回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SVM-loss"><span class="toc-number">4.1.</span> <span class="toc-text">SVM loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-loss"><span class="toc-number">4.1.1.</span> <span class="toc-text">Data loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Regularization-loss"><span class="toc-number">4.1.2.</span> <span class="toc-text">Regularization loss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax-loss"><span class="toc-number">4.2.</span> <span class="toc-text">Softmax loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%82%E7%82%B9%E4%B8%8B%E7%9A%84Softmax-loss"><span class="toc-number">4.2.1.</span> <span class="toc-text">不同观点下的Softmax loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">4.2.2.</span> <span class="toc-text">实际应用中的数据处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optimization"><span class="toc-number">5.</span> <span class="toc-text">Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F-x2F-%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-number">5.1.</span> <span class="toc-text">向量&#x2F;矩阵求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%90%91%E9%87%8F%E5%AF%B9%E5%88%97%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-number">5.2.</span> <span class="toc-text">列向量对列向量求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%90%91%E9%87%8F%E5%AF%B9%E8%A1%8C%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-number">5.3.</span> <span class="toc-text">行向量对行向量求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%90%91%E9%87%8F%E5%AF%B9%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-number">5.4.</span> <span class="toc-text">列向量对矩阵求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax-loss-%E5%92%8C-hinge-loss%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="toc-number">5.5.</span> <span class="toc-text">softmax loss 和 hinge loss的导数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/LLaMA%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LLaMA论文笔记">LLaMA论文笔记</a><time datetime="2023-08-02T06:45:17.000Z" title="发表于 2023-08-02 14:45:17">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0/%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/" title="AI论文相关术语">AI论文相关术语</a><time datetime="2023-08-02T06:11:00.000Z" title="发表于 2023-08-02 14:11:00">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/14/Transformer/" title="Transformer">Transformer</a><time datetime="2023-07-14T06:26:06.000Z" title="发表于 2023-07-14 14:26:06">2023-07-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/28/CS231n-1/" title="CS231n-assignment1部分笔记">CS231n-assignment1部分笔记</a><time datetime="2023-05-28T08:20:00.000Z" title="发表于 2023-05-28 16:20:00">2023-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/" title="毕设入门-常用python操作">毕设入门-常用python操作</a><time datetime="2023-04-25T01:11:19.000Z" title="发表于 2023-04-25 09:11:19">2023-04-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Aurora</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<p>score = XW + b，其中X,W,b的大小分别为<span class="math inline">\(N\times D\)</span>,<span class="math inline">\(D\times C\)</span>,<span class="math inline">\(1\times C\)</span> <span class="math display">\[
+\frac{dL}{dW} = \frac{dL}{d\,score}*\frac{d\,score}{dW},从维度看:\\
+dL/dW一定是D*C的(标量对矩阵求导),所以(N*C) * \frac{d\,score}{dW} = D*C\\
+所以, \frac{d\,score}{dW}是D*N的，因为只有(D*N)*(N*C) = D*C
+\]</span></p>
+<p><span class="math display">\[
+所以,\frac{dL}{dW} = X^T \frac{dL}{d\,score}
+\]</span></p>
+<p><span class="math display">\[
+同理,\frac{dL}{dX} = N*D = (N*C)(C*D) = \frac{dL}{d \,score} *W^T
+\]</span></p>
+<p><span class="math display">\[
+\frac{dL}{db} = 1*C = (1*N)(N*C) = dscore对第一维求和
+\]</span></p>
+<p>(原因：s = xw + b, dL/db本来等于1，但由于是矩阵，应为一个向量，而dL/db = dL/ds * ds/db = dL/ds (如果都是数值)，dL/ds相当于从计算图的下游回传过来的梯度，我们直接把这个梯度矩阵对第一维求和即得到真正的矩阵形式的dL/db )</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io">Aurora</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io/2023/05/28/CS231n-1/">https://lyh1028.github.io/2023/05/28/CS231n-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lyh1028.github.io" target="_blank">Aurora-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post_share"><div class="social-share" data-image="/img/kid1412_avatar1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/07/14/Transformer/" title="Transformer"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Transformer</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/" title="毕设入门-常用python操作"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">毕设入门-常用python操作</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/kid1412_avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aurora</div><div class="author-info__description">世之奇伟瑰怪非常之观，常在于险远，而人之所罕至焉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyh1028"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/liyh373@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python%E5%B8%B8%E8%A7%81%E7%9A%84%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C%E9%92%88%E5%AF%B9np.array"><span class="toc-number">2.</span> <span class="toc-text">python常见的矩阵操作(针对np.array)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">距离函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">4.</span> <span class="toc-text">线性回归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#svm-loss"><span class="toc-number">4.1.</span> <span class="toc-text">SVM loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#data-loss"><span class="toc-number">4.1.1.</span> <span class="toc-text">Data loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#regularization-loss"><span class="toc-number">4.1.2.</span> <span class="toc-text">Regularization loss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax-loss"><span class="toc-number">4.2.</span> <span class="toc-text">Softmax loss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%82%E7%82%B9%E4%B8%8B%E7%9A%84softmax-loss"><span class="toc-number">4.2.1.</span> <span class="toc-text">不同观点下的Softmax loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">4.2.2.</span> <span class="toc-text">实际应用中的数据处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optimization"><span class="toc-number">5.</span> <span class="toc-text">Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-number">5.1.</span> <span class="toc-text">向量&#x2F;矩阵求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%90%91%E9%87%8F%E5%AF%B9%E5%88%97%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-number">5.2.</span> <span class="toc-text">列向量对列向量求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%90%91%E9%87%8F%E5%AF%B9%E8%A1%8C%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-number">5.3.</span> <span class="toc-text">行向量对行向量求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%90%91%E9%87%8F%E5%AF%B9%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="toc-number">5.4.</span> <span class="toc-text">列向量对矩阵求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#softmax-loss-%E5%92%8C-hinge-loss%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="toc-number">5.5.</span> <span class="toc-text">softmax loss 和 hinge loss的导数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/LLaMA%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LLaMA论文笔记">LLaMA论文笔记</a><time datetime="2023-08-02T06:45:17.000Z" title="发表于 2023-08-02 14:45:17">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0/%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/" title="AI论文相关术语">AI论文相关术语</a><time datetime="2023-08-02T06:11:00.000Z" title="发表于 2023-08-02 14:11:00">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/14/Transformer/" title="Transformer">Transformer</a><time datetime="2023-07-14T06:26:06.000Z" title="发表于 2023-07-14 14:26:06">2023-07-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/28/CS231n-1/" title="CS231n-assignment1部分笔记">CS231n-assignment1部分笔记</a><time datetime="2023-05-28T08:20:00.000Z" title="发表于 2023-05-28 16:20:00">2023-05-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/25/%E6%AF%95%E8%AE%BE%E5%85%A5%E9%97%A8-%E5%B8%B8%E7%94%A8python%E6%93%8D%E4%BD%9C/" title="毕设入门-常用python操作">毕设入门-常用python操作</a><time datetime="2023-04-25T01:11:19.000Z" title="发表于 2023-04-25 09:11:19">2023-04-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Aurora</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
