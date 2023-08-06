@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>编译原理课程笔记(五) | Aurora-Blog</title><meta name="author" content="Aurora"><meta name="copyright" content="Aurora"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="语法分析的两种不同类别简要介绍，First集和Follow集，LL1 parser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理课程笔记(五)">
+<meta property="og:url" content="https://lyh1028.github.io/2023/03/14/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%94/index.html">
+<meta property="og:site_name" content="Aurora-Blog">
+<meta property="og:description" content="语法分析的两种不同类别简要介绍，First集和Follow集，LL1 parser">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lyh1028.github.io/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg">
+<meta property="article:published_time" content="2023-03-14T07:16:23.000Z">
+<meta property="article:modified_time" content="2023-08-06T15:21:00.705Z">
+<meta property="article:author" content="Aurora">
+<meta property="article:tag" content="编译原理">
+<meta property="article:tag" content="语法分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lyh1028.github.io/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lyh1028.github.io/2023/03/14/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%94/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '编译原理课程笔记(五)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-06 23:21:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/kid1412_avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/night_sky1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Aurora-Blog"><span class="site-name">Aurora-Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">编译原理课程笔记(五)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-14T07:16:23.000Z" title="发表于 2023-03-14 15:16:23">2023-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-06T15:21:00.705Z" title="更新于 2023-08-06 23:21:00">2023-08-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%90%86%E8%AE%BA%E8%AF%BE/">编译原理理论课</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="编译原理课程笔记(五)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="语法分析4">语法分析(4)</h1>
+<p>语法分析的作用：判断写的代码是否符合编程语言的语法，并建立parser tree，为语义分析做准备。</p>
+<p><img src="image-1.png" /></p>
+<p>两种不同分析方式：自顶向下，自底向上</p>
+<p>自顶向下：从语法树的根开始，逐渐扩展树，分为backtrack和predictive两种。基于最左推导。更好理解和手动操作</p>
+<p>自底向上：是最右推导的逆运算，应用范围更广，more powerful and automatic.</p>
+<p>如下图，不同方法由grammar G 推导出串acbd的过程如下：</p>
+<p><img src="image-2.png" /></p>
+<h2 id="backtrack">BackTrack</h2>
+<p>通用，需要先消除左递归。</p>
+<ul>
+<li>从S开始，根据产生式生成子节点，根据子节点的产生式继续生成……直到获得终结符。</li>
+<li>对比当前终结符与输入字符串中的待输入终结符，如果一致就accept这个字符，继续从下一个子节点开始生成。</li>
+<li>如果不一致，返回上一个节点，换一个产生式生成子节点。</li>
+</ul>
+<p><img src="image-3.png" /></p>
+<p>缺点：低效，时间复杂度是指数级的；撤消语义操作可能很困难（删除分析树中的某个节点）</p>
+<h2 id="predictive-parser">Predictive Parser</h2>
+<p>往前看一步</p>
+<p><strong>每一个候选产生式的第一个终结符都唯一时，便不需要回溯</strong></p>
+<p>e.g</p>
+<p>A-&gt;aBD|bBB</p>
+<p>B-&gt;c|bce</p>
+<p>D-&gt;d</p>
+<p>若需要产生abced，则第一条一定用aBD，第二条因为B能推导出的非终结符只有b或c，所以选择bce.</p>
+<p>使用什么产生式的依据：</p>
+<ul>
+<li><p>下一个输入符号</p></li>
+<li><p>当前正在处理的非终结符</p></li>
+</ul>
+<p>上面无法判断的情况：</p>
+<ul>
+<li><p>共同前缀 <span class="math inline">\(A\to \alpha\gamma|\alpha\beta\)</span></p></li>
+<li><p>左递归 <span class="math inline">\(A\to A\beta|\alpha\)</span></p></li>
+</ul>
+<p>对无法判断情况的处理方式——改写产生式。</p>
+<h3 id="共同前缀">共同前缀</h3>
+<ul>
+<li>提取公因子,如<span class="math inline">\(A\to \alpha\gamma|\alpha\beta\)</span>
+<ul>
+<li><span class="math inline">\(A\to \alpha A&#39;\)</span>,</li>
+<li><span class="math inline">\(A&#39;\to \beta | \gamma\)</span></li>
+</ul></li>
+<li>"推迟选择"</li>
+</ul>
+<h3 id="左递归">左递归</h3>
+<ul>
+<li>同样推迟选择</li>
+<li><span class="math inline">\(A\to\alpha A&#39;\)</span>,<span class="math inline">\(A&#39;\to \beta A&#39;|\epsilon\)</span></li>
+</ul>
+<h3 id="llk-parser">LL(k) Parser</h3>
+<p>L：从左往右扫描</p>
+<p>L：生成最左推导（top-down）</p>
+<p>k：向前看k个符号</p>
+<h2 id="parser-table">Parser Table</h2>
+<p>行：非终结符，列：向前看到的终结符</p>
+<ul>
+<li><p>input buffer : 初始放input string，最后加一个$</p></li>
+<li><p>stack: 初始栈顶为$,栈内只有一个元素</p>
+<p>一个stack里如果有终结符说明终结符还未与input匹配，如果有非终结符说明还没有展开</p></li>
+<li><p>− Parse table</p>
+<ul>
+<li>M[X,a] 代表stack top为X，buffer待匹配的symbol为a时，查表是否有规则$X... $</li>
+</ul></li>
+<li><p>Parse driver</p>
+<ul>
+<li>根据&lt;stack top, current token&gt;做出action</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>int</th>
+<th>*</th>
+<th>+</th>
+<th>(</th>
+<th>)</th>
+<th>$</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E</td>
+<td>E <span class="math inline">\(\to\)</span> TE'</td>
+<td></td>
+<td></td>
+<td>E <span class="math inline">\(\to\)</span> TE'</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>E'</td>
+<td></td>
+<td></td>
+<td>E'<span class="math inline">\(\to\)</span>+E</td>
+<td></td>
+<td>E'<span class="math inline">\(\to\epsilon\)</span></td>
+<td>E'<span class="math inline">\(\to\epsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td>T</td>
+<td>T<span class="math inline">\(\to\)</span>int T'</td>
+<td></td>
+<td></td>
+<td>T<span class="math inline">\(\to\)</span>(E)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>T'</td>
+<td></td>
+<td>T'<span class="math inline">\(\to\)</span> *T</td>
+<td>T'<span class="math inline">\(\to\epsilon\)</span></td>
+<td></td>
+<td>T'<span class="math inline">\(\to\epsilon\)</span></td>
+<td>T'<span class="math inline">\(\to\epsilon\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>第一列列出了非终结符,第一行是<strong>“向前看”</strong>（即从左往右遍历时下一个将要遇到的）的终结符号（和额外的$符号,$代表句子末尾）</p>
+<p>对栈内的每一步，要么expand，要么match</p>
+<p>&lt;X,a&gt;:X代表栈顶的symbol，a代表当前buffer中将要匹配的input token</p>
+<ul>
+<li>如果X是非终结符
+<ul>
+<li>X=a且a=$ 则匹配完成</li>
+<li>X=a且a为终结符，则匹配下一个</li>
+<li>否则，halt and reject input</li>
+</ul></li>
+<li>如果X是终结符
+<ul>
+<li>if have M[X,a],则X<span class="math inline">\(\to\)</span> RHS,X出栈，RHS逆序进栈（例如int T'）先进T’再进int</li>
+<li>若M[X,a]没有对应项，则halt and reject</li>
+</ul></li>
+</ul>
+<p><img src="image-4.png" /></p>
+<h2 id="如何构建parser-table">如何构建Parser Table</h2>
+<h3 id="first集">1.First集</h3>
+<p>First(<span class="math inline">\(\alpha\)</span>)--<span class="math inline">\(\alpha\)</span>能推导出的第一个终结符的集合。</p>
+<p>反复进行下述判断，直到没有新的字符添加进任何First集中：</p>
+<ul>
+<li>如果X是终结符，则First(<span class="math inline">\(X\)</span>) = {<span class="math inline">\(X\)</span>}</li>
+<li>如果X是非终结符，且X能推导出空字符，则First<span class="math inline">\((X)\)</span>包含<span class="math inline">\(\epsilon\)</span></li>
+<li>如果X是非终结符，<span class="math inline">\(X\to Y_1Y_2Y_3...Y_k\)</span>，then：
+<ul>
+<li>如果a在First(<span class="math inline">\(Y_i\)</span>)中，且1~i-1的First集中都有空字符，那么a也在First(<span class="math inline">\(X\)</span>)中</li>
+<li>First(<span class="math inline">\(Y_1\)</span>)的所有字符一定在First(<span class="math inline">\(X\)</span>)中</li>
+<li>如果<span class="math inline">\(Y_1-Y_k\)</span>的First集都含有空字符，那么First(X)也有空字符</li>
+</ul></li>
+</ul>
+<h3 id="follow集">2.Follow集</h3>
+<p>可以在A后面出现的终结符集合。</p>
+<p>反复进行下述判断，直到没有新的字符添加进所有non-terminal的Follow集中：</p>
+<ul>
+<li>如果S是开始符号，则$在S的Follow集中。</li>
+<li>如果有产生式<span class="math inline">\(A\to\alpha B\beta\)</span>，First(<span class="math inline">\(\beta\)</span>)中的所有符号，除了空字符，都在Follow(B)中。</li>
+<li>如果有产生式<span class="math inline">\(A\to \alpha B\)</span> 或者 <span class="math inline">\(A\to\alpha B\beta\)</span>，First(<span class="math inline">\(\beta\)</span>)有空字符，那么所有Follow(A)中的字符也在Follow(B)中。</li>
+</ul>
+<p>这俩集合的作用：区分使用哪个推导式</p>
+<h3 id="construct-ll1-table">3.Construct LL(1) Table</h3>
+<p>对于rule <span class="math inline">\(A\to \alpha\)</span> 和 symbol a：</p>
+<p>如果<span class="math inline">\(\alpha\)</span>的First集中有空字符，或<span class="math inline">\(\alpha=\epsilon\)</span>，a在Follow(A)中，则把<span class="math inline">\(A\to\alpha\)</span>添加到M[A,a]中。</p>
+<p>对于First(<span class="math inline">\(\alpha\)</span>)中的非空字符b，直接把<span class="math inline">\(A\to\alpha\)</span>添加到M[A,b]中</p>
+<p><img src="image-5.png" /></p>
+<p>判断是否是LL1文法：LL1表中每个格子只有至多一个推导式</p>
+<p>第二种方法：LL1文法的充要条件——对于<span class="math inline">\(A\to \alpha|\beta\)</span> 要满足：</p>
+<ul>
+<li>First(<span class="math inline">\(\alpha\)</span>)<span class="math inline">\(\cap\)</span>First(<span class="math inline">\(\beta\)</span>) = <span class="math inline">\(\empty\)</span></li>
+<li><span class="math inline">\(\alpha,\beta\)</span>中至多有一个可以产生 <span class="math inline">\(\epsilon\)</span> (derive <span class="math inline">\(\epsilon\)</span>) eg <span class="math inline">\(\beta\to...\to\epsilon\)</span> [包含多步产生的情况]</li>
+<li>如果<span class="math inline">\(\beta\)</span>产生了空字符，那么<span class="math inline">\(\alpha\)</span>的First集 和 A的Follow集交集为空。</li>
+</ul>
+<p>不是LL1的<strong>可能可以</strong>通过去除左公因子和左递归来变成LL1</p>
+<h3 id="复杂度">复杂度</h3>
+<p><strong>使用</strong>LL1 Table的时空复杂度</p>
+<p>时间上，每一个symbol都会在常数时间（至多为规则条数）内判断是否accept</p>
+<p>空间上，（指stack的最大大小）要小于input的大小</p>
+<p>LL2-LLk的parse table大小：</p>
+<p><span class="math inline">\(O(|N|*|T|^k)\)</span></p>
+<p>其中，N为非终结符集合大小，T为终结符集合大小</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io">Aurora</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://lyh1028.github.io/2023/03/14/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%94/">https://lyh1028.github.io/2023/03/14/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%94/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lyh1028.github.io" target="_blank">Aurora-Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><a class="post-meta__tags" href="/tags/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">语法分析</a></div><div class="post_share"><div class="social-share" data-image="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/15/%E6%99%AE%E9%80%9A%E7%AE%97%E6%B3%95or%E6%9C%BA%E8%AF%95%E9%A2%98/%E5%9F%BA%E7%A1%80%E5%9B%BE%E8%AE%BA%E7%AE%97%E6%B3%95/" title="基础图论算法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基础图论算法</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/13/DFS/" title="DFS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DFS</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/01/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%80/" title="编译原理课程笔记(一)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-29</div><div class="title">编译原理课程笔记(一)</div></div></a></div><div><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%B8%89/" title="编译原理课程笔记(三)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-01</div><div class="title">编译原理课程笔记(三)</div></div></a></div><div><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="编译原理课程笔记(二)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-01</div><div class="title">编译原理课程笔记(二)</div></div></a></div><div><a href="/2023/02/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E7%AC%94%E8%AE%B0%E5%9B%9B/" title="编译原理课程笔记(四)"><img class="cover" src="/img/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E9%BB%91%E4%B9%A6%E5%B0%81%E9%9D%A2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-01</div><div class="title">编译原理课程笔记(四)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/kid1412_avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aurora</div><div class="author-info__description">世之奇伟瑰怪非常之观，常在于险远，而人之所罕至焉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyh1028"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/liyh373@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%904"><span class="toc-number">1.</span> <span class="toc-text">语法分析(4)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#backtrack"><span class="toc-number">1.1.</span> <span class="toc-text">BackTrack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#predictive-parser"><span class="toc-number">1.2.</span> <span class="toc-text">Predictive Parser</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E5%90%8C%E5%89%8D%E7%BC%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">共同前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E9%80%92%E5%BD%92"><span class="toc-number">1.2.2.</span> <span class="toc-text">左递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#llk-parser"><span class="toc-number">1.2.3.</span> <span class="toc-text">LL(k) Parser</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#parser-table"><span class="toc-number">1.3.</span> <span class="toc-text">Parser Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BAparser-table"><span class="toc-number">1.4.</span> <span class="toc-text">如何构建Parser Table</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#first%E9%9B%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">1.First集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#follow%E9%9B%86"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.Follow集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#construct-ll1-table"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.Construct LL(1) Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.4.4.</span> <span class="toc-text">复杂度</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/05/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/QLoRA%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="QLoRA论文笔记">QLoRA论文笔记</a><time datetime="2023-08-05T03:52:13.000Z" title="发表于 2023-08-05 11:52:13">2023-08-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/LLaMA%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" title="LLaMA论文笔记">LLaMA论文笔记</a><time datetime="2023-08-02T06:45:17.000Z" title="发表于 2023-08-02 14:45:17">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/08/02/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0/%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/" title="AI论文相关术语">AI论文相关术语</a><time datetime="2023-08-02T06:11:00.000Z" title="发表于 2023-08-02 14:11:00">2023-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/14/Transformer/" title="Transformer">Transformer</a><time datetime="2023-07-14T06:26:06.000Z" title="发表于 2023-07-14 14:26:06">2023-07-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/28/CS231n-1/" title="CS231n-assignment1部分笔记">CS231n-assignment1部分笔记</a><time datetime="2023-05-28T08:20:00.000Z" title="发表于 2023-05-28 16:20:00">2023-05-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Aurora</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
